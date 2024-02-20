@@ -1,0 +1,467 @@
+clc
+clear
+rhoair=1.1839;
+rhowater=1000;
+V=10.88;
+q=1/2*(rhoair*V^2);
+paconversion=9.80665;
+x=[0.00076, 0.00381, 0.01143, 0.01905, 0.038, 0.062, 0.08077, 0.10135, 0.12192, 0.13716, 0.00152, 0.00762, 0.01524, 0.02286, 0.04115, 0.05944, 0.07773, 0.09692, 0.1143, 0.12954];
+y=[0.00184, 0.00395, 0.00634, 0.00762, 0.00892, 0.00863, 0.00755, 0.00584, 0.0372, 0.0019, -0.00257, -0.00537, -0.00706, -0.00805, -0.00898, -0.00873, -0.00776, -0.00633, -0.00455, -0.00284];
+
+c=0.15;
+toth=x/c;
+ h0=[170,154,148,152,150,151,152,156,158,152,176,152,150,148,148,156,162,154,155,156];
+ h1=[166,143,147,152,150,150,152,156,157,156,176,152,150,148,148,156,162,154,155,156];
+ h2=[162 150 146 150 149 150 151 157 158 158 176 152 151 150 148 156 162 154 154 155];
+ h3=[160,144,142,148,158,150,151,156,158,162,176,150,155,154,150,154,168,156,155,150];
+ h4=[153,138,138,146,146,150,151,158,159,163,178,152,157,156,153,154,169,156,155,156];
+ h5=[149 132 134 144 146 148 150 158 159 165 178 150 160 158 154 154 172 156 155 156];
+ h6=[148 132 134 143 145 148 150 158 159 166 178 150 160 158 154 154 170 158 155 156];
+ h7=[142 125 130 141 144 148 150 160 160 169 175 150 163 160 156 154 172 158 156 158];
+ h8=[132 120 127 140 144 148 150 160 160 170 178 152 165 162 157 154 172 158 156 157];
+ h9=[130 117 125 138 144 147 150 161 160 173 180 152 164 161 158 154 172 158 156 158];
+h10=[122 108 122 137 143 148 151 162 161 175 180 150 170 166 160 154 172 160 156 158];
+h11=[126 107 122 136 142 147 150 162 161 176 180 152 168 165 162 154 172 160 156 158];
+h12=[122 110 125 136 142 148 150 162 160 175 180 152 170 166 162 154 172 160 154 156];
+h13=[132 120 130 138 140 144 146 162 160 175 180 152 168 166 162 152 172 160 152 158];
+h14=[142,130,133,139,140,142,144,162,160,174,178,152,170,166,162,150,172,160,152,156];
+hwall=156;
+  Cp0=((h0-hwall)*paconversion)/q;
+  Cp1=((h1-hwall)*paconversion)/q;
+  Cp2=((h2-hwall)*paconversion)/q;
+  Cp3=((h3-hwall)*paconversion)/q;
+  Cp4=((h4-hwall)*paconversion)/q;
+  Cp5=((h5-hwall)*paconversion)/q;
+  Cp6=((h6-hwall)*paconversion)/q;
+  Cp7=((h7-hwall)*paconversion)/q;
+  Cp8=((h8-hwall)*paconversion)/q;
+  Cp9=((h9-hwall)*paconversion)/q;
+Cp10=((h10-hwall)*paconversion)/q;
+Cp11=((h11-hwall)*paconversion)/q;
+Cp12=((h12-hwall)*paconversion)/q;
+Cp13=((h13-hwall)*paconversion)/q;
+Cp14=((h14-hwall)*paconversion)/q;
+Cpall=[Cp1;Cp2;Cp3;Cp4;Cp5;Cp6;Cp7;Cp8;Cp9;Cp10;Cp11;Cp12;Cp13;Cp14];
+toth1=toth(1:10);
+toth2=toth(11:20);
+Cp0upper=Cp0(1:10);, Cp0lower=Cp0(11:20);
+Cp1upper=Cp1(1:10);, Cp1lower=Cp1(11:20);
+Cp2upper=Cp2(1:10);, Cp2lower=Cp2(11:20);
+Cp3upper=Cp3(1:10);, Cp3lower=Cp3(11:20);
+Cp4upper=Cp4(1:10);, Cp4lower=Cp4(11:20);
+Cp5upper=Cp5(1:10);, Cp5lower=Cp5(11:20);
+Cp6upper=Cp6(1:10);, Cp6lower=Cp6(11:20);
+Cp7upper=Cp7(1:10);, Cp7lower=Cp7(11:20);
+Cp8upper=Cp8(1:10);, Cp8lower=Cp8(11:20);
+Cp9upper=Cp9(1:10);, Cp9lower=Cp9(11:20);
+Cp10upper=Cp10(1:10);, Cp10lower=Cp10(11:20);
+Cp11upper=Cp11(1:10);, Cp11lower=Cp11(11:20);
+Cp12upper=Cp12(1:10);, Cp12lower=Cp12(11:20);
+Cp13upper=Cp13(1:10);, Cp13lower=Cp13(11:20);
+Cp14upper=Cp14(1:10);, Cp14lower=Cp14(11:20);
+
+key=input("What angle of attack would you like to plot for? [0,14]:\n");
+if key==0
+% plot(toth1,Cp0upper)
+% hold on
+% plot(toth2,Cp0lower)
+% legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 0"),xlabel("x/c"),ylabel("Cp")
+% hold off
+elseif key==1
+plot(toth1,Cp1upper)
+hold on
+plot(toth2,Cp1lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 1"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==2
+plot(toth1,Cp2upper)
+hold on
+plot(toth2,Cp2lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 2"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==3
+plot(toth1,Cp3upper)
+hold on
+plot(toth2,Cp3lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 3"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==4
+plot(toth1,Cp4upper)
+hold on
+plot(toth2,Cp4lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 4"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==5
+plot(toth1,Cp5upper)
+hold on
+plot(toth2,Cp5lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 5"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==6
+plot(toth1,Cp6upper)
+hold on
+plot(toth2,Cp6lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 6"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==7
+plot(toth1,Cp7upper)
+hold on
+plot(toth2,Cp7lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 7"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==8
+plot(toth1,Cp8upper)
+hold on
+plot(toth2,Cp8lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 8"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==9
+plot(toth1,Cp9upper)
+hold on
+plot(toth2,Cp9lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 9"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==10
+plot(toth1,Cp10upper)
+hold on
+plot(toth2,Cp10lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 10"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==11
+plot(toth1,Cp11upper)
+hold on
+plot(toth2,Cp11lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 11"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==12
+plot(toth1,Cp12upper)
+hold on
+plot(toth2,Cp12lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 12"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==13
+plot(toth1,Cp13upper)
+hold on
+plot(toth2,Cp13lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 13"),xlabel("x/c"),ylabel("Cp")
+hold off
+elseif key==14
+    plot(toth1,Cp14upper)
+hold on
+plot(toth2,Cp14lower)
+legend("upper","lower"),title("Pressure Coefficient vs x/c, \alpha = 14"),xlabel("x/c"),ylabel("Cp")
+hold off
+else
+    disp("error!")
+end
+xupper=x(1:2:19);, yupper=y(1:2:19);
+xlower=x(2:2:20);, ylower=y(2:2:20);
+
+
+
+
+cp_u = [Cp0upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp0lower];  % Lower surface pressure coefficient per unit length
+cn0=   (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca0=   (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp1upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp1lower];  % Lower surface pressure coefficient per unit length
+cn1=   (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca1=   (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp1upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp1lower];  % Lower surface pressure coefficient per unit length
+cn1=   (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca1=   (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp2upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp2lower];  % Lower surface pressure coefficient per unit length
+cn2=   (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca2=   (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp3upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp3lower];  % Lower surface pressure coefficient per unit length
+cn3=   (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca3=   (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp4upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp4lower];  % Lower surface pressure coefficient per unit length
+cn4=   (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca4=   (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp5upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp5lower];  % Lower surface pressure coefficient per unit length
+cn5=   (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca5=   (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp6upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp6lower];  % Lower surface pressure coefficient per unit length
+cn6=   (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca6=   (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp7upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp7lower];  % Lower surface pressure coefficient per unit length
+cn7=   (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca7=   (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp8upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp8lower];  % Lower surface pressure coefficient per unit length
+cn8=   (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca8=   (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp9upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp9lower];  % Lower surface pressure coefficient per unit length
+cn9=   (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca9=   (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp10upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp10lower];  % Lower surface pressure coefficient per unit length
+cn10=  (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca10=  (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp11upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp11lower];  % Lower surface pressure coefficient per unit length
+cn11=  (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca11=  (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp12upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp12lower];  % Lower surface pressure coefficient per unit length
+cn12=  (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca12=  (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp13upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp13lower];  % Lower surface pressure coefficient per unit length
+cn13=  (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca13=  (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+cp_u = [Cp14upper];  % Upper surface pressure coefficient per unit length
+cp_l = [Cp14lower];  % Lower surface pressure coefficient per unit length
+cn14=  (trapz(xlower,cp_l) - trapz(xupper,cp_u));
+ca14=  (trapz(yupper,cp_u) - trapz(ylower,cp_l));
+
+
+Cl0=cn0*cosd(0)-ca0*sind(0);
+Cd0=cn0*sind(0)+ca0*cosd(0);
+
+Cl1=cn1*cosd(1)-ca1*sind(1);
+Cd1=cn1*sind(1)+ca1*cosd(1);
+
+Cl2=cn2*cosd(2)-ca2*sind(2);
+Cd2=cn2*sind(2)+ca2*cosd(2);
+
+Cl3=cn3*cosd(3)-ca3*sind(3);
+Cd3=cn3*sind(3)+ca3*cosd(3);
+
+Cl4=cn4*cosd(4)-ca4*sind(4);
+Cd4=cn4*sind(4)-ca4*cosd(4);
+
+Cl5=cn5*cosd(5)-ca5*sind(5);
+Cd5=cn5*sind(5)+ca5*cosd(5);
+
+Cl6=cn6*cosd(6)-ca6*sind(6);
+Cd6=cn6*sind(6)+ca6*cosd(6);
+
+Cl7=cn7*cosd(7)-ca7*sind(7);
+Cd7=cn7*sind(7)+ca7*cosd(7);
+
+Cl8=cn8*cosd(8)-ca8*sind(8);
+Cd8=cn8*sind(8)+ca8*cosd(8);
+
+Cl9=cn9*cosd(9)-ca9*sind(9);
+Cd9=cn9*sind(9)+ca9*cosd(9);
+
+Cl10=cn10*cosd(10)-ca10*sind(10);
+Cd10=cn10*sind(10)+ca10*cosd(10);
+
+Cl11=cn11*cosd(11)-ca11*sind(11);
+Cd11=cn11*sind(11)+ca11*cosd(11);
+
+Cl12=cn12*cosd(12)-ca12*sind(12);
+Cd12=cn12*sind(12)+ca12*cosd(12);
+
+Cl13=cn13*cosd(13)-ca13*sind(13);
+Cd13=cn13*sind(13)+ca13*cosd(13);
+
+Cl14=cn14*cosd(14)-ca14*sind(14);
+Cd14=cn14*sind(14)+ca14*cosd(14);
+
+%%%%%%%%% YUSUF'S PART %%%%%%%%%%%%%
+CL=[Cl0,Cl1,Cl2,Cl3,Cl4,Cl5,Cl6,Cl7,Cl8,Cl9,Cl10,Cl11,Cl12,Cl13,Cl14];
+CD=[Cd0,Cd1,Cd2,Cd3,Cd4,Cd5,Cd6,Cd7,Cd8,Cd9,Cd10,Cd11,Cd12,Cd13,Cd14];
+alfa=[0:14];
+N = length(xlower);
+dY_L= diff(ylower);
+dX_L= diff(xlower);
+der_L= dY_L./dX_L;
+der_L(N) = der_L(N-1);
+
+M= length(xupper);
+dY_U= diff(yupper);
+dX_U= diff(xupper);
+der_U= dY_U./dX_U; 
+der_U(M) = der_U(M-1);
+
+CP_U_der_U0= Cp0upper.*der_U;
+CP_L_der_L0= Cp0lower.*der_L; 
+cm_LE0= trapz(xupper,Cp0upper.*xupper)-trapz(xlower,Cp0lower.*xlower) + trapz(xupper,CP_U_der_U0.*yupper)-trapz(xlower,CP_L_der_L0.*ylower) 
+
+CP_U_der_U1= Cp1upper.*der_U;
+CP_L_der_L1= Cp1lower.*der_L;
+ca1= trapz(xupper,CP_U_der_U1)-trapz(xlower,CP_L_der_L1); 
+cm_LE1= trapz(xupper,Cp1upper.*xupper)-trapz(xlower,Cp1lower.*xlower) + trapz(xupper,CP_U_der_U1.*yupper)-trapz(xlower,CP_L_der_L1.*ylower) 
+
+CP_U_der_U2= Cp2upper.*der_U;
+CP_L_der_L2= Cp2lower.*der_L;
+ca2= trapz(xupper,CP_U_der_U2)-trapz(xlower,CP_L_der_L2); 
+cm_LE2= trapz(xupper,Cp2upper.*xupper)-trapz(xlower,Cp2lower.*xlower) + trapz(xupper,CP_U_der_U2.*yupper)-trapz(xlower,CP_L_der_L2.*ylower) 
+
+CP_U_der_U3= Cp3upper.*der_U;
+CP_L_der_L3= Cp3lower.*der_L;
+cm_LE3= trapz(xupper,Cp3upper.*xupper)-trapz(xlower,Cp3lower.*xlower) + trapz(xupper,CP_U_der_U3.*yupper)-trapz(xlower,CP_L_der_L3.*ylower) 
+
+CP_U_der_U4= Cp4upper.*der_U;
+CP_L_der_L4= Cp4lower.*der_L;
+ca0= trapz(xupper,CP_U_der_U0)-trapz(xlower,CP_L_der_L0); 
+cm_LE4= trapz(xupper,Cp4upper.*xupper)-trapz(xlower,Cp4lower.*xlower) + trapz(xupper,CP_U_der_U4.*yupper)-trapz(xlower,CP_L_der_L4.*ylower) 
+
+CP_U_der_U5= Cp5upper.*der_U;
+CP_L_der_L5= Cp5lower.*der_L;
+cm_LE5= trapz(xupper,Cp5upper.*xupper)-trapz(xlower,Cp5lower.*xlower) + trapz(xupper,CP_U_der_U5.*yupper)-trapz(xlower,CP_L_der_L5.*ylower) 
+
+CP_U_der_U6= Cp6upper.*der_U;
+CP_L_der_L6= Cp6lower.*der_L;
+ca0= trapz(xupper,CP_U_der_U0)-trapz(xlower,CP_L_der_L0); 
+cm_LE6= trapz(xupper,Cp6upper.*xupper)-trapz(xlower,Cp6lower.*xlower) + trapz(xupper,CP_U_der_U6.*yupper)-trapz(xlower,CP_L_der_L6.*ylower) 
+
+CP_U_der_U7= Cp7upper.*der_U;
+CP_L_der_L7= Cp7lower.*der_L;
+cm_LE7= trapz(xupper,Cp7upper.*xupper)-trapz(xlower,Cp7lower.*xlower) + trapz(xupper,CP_U_der_U7.*yupper)-trapz(xlower,CP_L_der_L7.*ylower) 
+
+CP_U_der_U8= Cp8upper.*der_U;
+CP_L_der_L8= Cp8lower.*der_L;
+ca0= trapz(xupper,CP_U_der_U0)-trapz(xlower,CP_L_der_L0); 
+cm_LE8= trapz(xupper,Cp8upper.*xupper)-trapz(xlower,Cp8lower.*xlower) + trapz(xupper,CP_U_der_U8.*yupper)-trapz(xlower,CP_L_der_L8.*ylower) 
+
+CP_U_der_U9= Cp9upper.*der_U;
+CP_L_der_L9= Cp9lower.*der_L;
+cm_LE9= trapz(xupper,Cp9upper.*xupper)-trapz(xlower,Cp9lower.*xlower) + trapz(xupper,CP_U_der_U9.*yupper)-trapz(xlower,CP_L_der_L9.*ylower) 
+
+CP_U_der_U10= Cp10upper.*der_U;
+CP_L_der_L10= Cp10lower.*der_L;
+cm_LE10= trapz(xupper,Cp10upper.*xupper)-trapz(xlower,Cp10lower.*xlower) + trapz(xupper,CP_U_der_U10.*yupper)-trapz(xlower,CP_L_der_L10.*ylower) 
+
+CP_U_der_U11= Cp11upper.*der_U;
+CP_L_der_L11= Cp11lower.*der_L;
+cm_LE11= trapz(xupper,Cp11upper.*xupper)-trapz(xlower,Cp11lower.*xlower) + trapz(xupper,CP_U_der_U11.*yupper)-trapz(xlower,CP_L_der_L11.*ylower) 
+
+CP_U_der_U12= Cp12upper.*der_U;
+CP_L_der_L12= Cp12lower.*der_L;
+ca0= trapz(xupper,CP_U_der_U0)-trapz(xlower,CP_L_der_L0); 
+cm_LE12= trapz(xupper,Cp12upper.*xupper)-trapz(xlower,Cp12lower.*xlower) + trapz(xupper,CP_U_der_U12.*yupper)-trapz(xlower,CP_L_der_L12.*ylower) 
+
+CP_U_der_U13= Cp13upper.*der_U;
+CP_L_der_L13= Cp13lower.*der_L;
+cm_LE13= trapz(xupper,Cp13upper.*xupper)-trapz(xlower,Cp13lower.*xlower) + trapz(xupper,CP_U_der_U13.*yupper)-trapz(xlower,CP_L_der_L13.*ylower) 
+
+CP_U_der_U14= Cp14upper.*der_U;
+CP_L_der_L14= Cp14lower.*der_L;
+cm_LE14= trapz(xupper,Cp14upper.*xupper)-trapz(xlower,Cp14lower.*xlower) + trapz(xupper,CP_U_der_U14.*yupper)-trapz(xlower,CP_L_der_L14.*ylower) 
+
+CM=[cm_LE0,cm_LE1,cm_LE2,cm_LE3,cm_LE4,cm_LE5,cm_LE6,cm_LE7,cm_LE8,cm_LE9,cm_LE10,cm_LE11,cm_LE12,cm_LE13,cm_LE14];
+
+
+% INVISCID XFOIL DATAS
+cl_t0= 0;
+cm_t0= 0;
+cd_t0= 0.00106;
+
+cl_t1= 0.1208;
+cm_t1= -0.0014;
+cd_t1= 0.00106;
+
+cl_t2= 0.2416;
+cm_t2= -0.0028;
+cd_t2= 0.00106;
+
+cl_t3= 0.3623;
+cm_t3= -0.0042;
+cd_t3= 0.00107;
+
+cl_t4= 0.4830;
+cm_t4= -0.0056;
+cd_t4= 0.00108;
+
+cl_t5= 0.6034;
+cm_t5= -0.0070;
+cd_t5= 0.00109;
+
+cl_t6= 0.7237;
+cm_t6= -0.0084;
+cd_t6= 0.00110;
+
+cl_t7= 0.8437;
+cm_t7= -0.0097;
+cd_t7= 0.00112;
+
+cl_t8= 0.9635;
+cm_t8= -0.0111;
+cd_t8= 0.00114;
+
+cl_t9= 1.0831;
+cm_t9= -0.0124;
+cd_t9= 0.00116;
+
+cl_t10= 1.2022; 
+cm_t10= -0.0138;
+cd_t10= 0.00119;
+
+cl_t11= 1.3210;
+cm_t11= -0.0151;
+cd_t11= 0.00122;
+
+cl_t12= 1.4395;
+cm_t12= -0.0164;
+cd_t12= 0.00124;
+
+cl_t13= 1.5574;
+cm_t13= -0.0176;
+cd_t13= 0.00128;
+
+cl_t14= 1.6749;
+cm_t14= -0.0189;
+cd_t14= 0.00131;
+% % 
+CL_T=[cl_t0,cl_t1,cl_t2,cl_t3,cl_t4,cl_t5,cl_t6,cl_t7,cl_t8,cl_t9,cl_t10,cl_t11,cl_t12,cl_t13,cl_t14];
+CD_T=[cd_t0,cd_t1,cd_t2,cd_t3,cd_t4,cd_t5,cd_t6,cd_t7,cd_t8,cd_t9,cd_t10,cd_t11,cd_t12,cd_t13,cd_t14];
+CM_T=[cm_t0,cm_t1,cm_t2,cm_t3,cm_t4,cm_t5,cm_t6,cm_t7,cm_t8,cm_t9,cm_t10,cm_t11,cm_t12,cm_t13,cm_t14];
+
+%PLOTS
+figure(1)
+plot(alfa,CL);
+hold on;
+plot(alfa,CL_T);
+legend("experimental","theoretical"),title("Cl vs alpha"),xlabel("alpha"),ylabel("Cl");
+hold off
+
+figure(2)
+plot(alfa,CD);
+hold on;
+plot(alfa,CD_T);
+legend("experimental","theoretical"),title("Cd vs alpha"),xlabel("alpha"),ylabel("Cd");
+hold off
+
+figure(3)
+plot(alfa,CM);
+hold on;
+plot(alfa,CM_T);
+legend("experimental","theoretical"),title("Cm vs alpha"),xlabel("alpha"),ylabel("Cm");
+hold off
+
+figure(4)
+plot(CD,CL);
+hold on;
+plot(CD_T,CL_T);
+legend("experimental","theoretical"),title("Cl vs Cd"),xlabel("Cd"),ylabel("Cl");
+hold off  
+
